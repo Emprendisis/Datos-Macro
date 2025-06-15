@@ -25,7 +25,15 @@ indicadores = {
 # --- Widgets de selección ---
 with st.sidebar:
     st.header("Filtros")
-    pais = st.selectbox("País", wbdata.get_country(display=False))
+    # Obtener el diccionario de países {código: nombre}
+    paises_dict = wbdata.get_country()
+    paises = {pais['id']: pais['name'] for pais in paises_dict}
+
+# Menú desplegable con los nombres
+    pais_nombre = st.selectbox("🌍 País", list(paises.values()))
+
+# Recuperar el código del país seleccionado
+    pais_codigo = [codigo for codigo, nombre in paises.items() if nombre == pais_nombre][0]   
     indicador = st.selectbox("Indicador", list(indicadores.keys()))
     anio_inicio, anio_fin = st.slider("Rango de años", 2000, 2023, (2010, 2022))
 
