@@ -1,0 +1,3 @@
+streamlit
+pandas
+wbdata==0.3.0
